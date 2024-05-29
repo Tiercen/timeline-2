@@ -1,0 +1,270 @@
+:root {
+    --primary-color: #4000ff;
+    --timeline-bg-color: #888;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    background-color: rgb(19, 224, 224);
+    width: 60%;
+    text-align: center;
+    border-radius: 1.5rem;
+    margin-top: .5rem;
+}
+
+.topper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: .5rem;
+    width: 100%;
+    /* height: 25vh; */
+
+    background-color: whitesmoke;
+}
+
+.topper > * {
+    font-weight: 600;
+}
+
+.topper a {
+    margin-bottom: 1rem;
+}
+
+.timeline-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-wrapper {
+    position: relative;
+    width: 95%;
+    height: 70vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: auto;
+    transition: .3s ease;
+}
+
+.timeline {
+    position: absolute;
+    height: .12rem;
+    padding: 0 15rem;
+    background-color: var(--timeline-bg-color);
+    list-style: none;
+
+    --scale: 1;
+
+    display: flex;
+}
+
+.timeline li {
+    position: relative;
+    width: 20rem;
+}
+
+.timeline li::before,
+.timeline li::after,
+.timeline li .title,
+.data {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(var(--scale));
+    transition: .5s ease;
+    
+}
+
+.timeline li::before {
+    content: "";
+    top: 1rem;
+
+    display: inline-block;
+    width: 0.12rem;
+    height: 1rem;
+    background-color: var(--timeline-bg-color);
+}
+
+.timeline li:nth-child(even)::before {
+    top: -1rem;
+}
+
+.timeline li:hover::before {
+    background-color: var(--primary-color);
+}
+
+.timeline li::after {
+    content: attr(data-date);
+    top: -3.4rem;
+}
+
+.timeline li:nth-child(odd)::after {
+    top: 3.4rem;
+}
+
+.timeline li:hover::after,
+.timeline li .title {
+    color: var(--primary-color);
+}
+
+.timeline li .title {
+    top: 2.4rem;
+
+    font: 600 1.1rem 'poppins', sans-serif;
+    white-space: pre; /* Keeps the title on a single line */
+
+    opacity: 0;
+}
+
+.timeline li:nth-child(odd) > .title {
+    top: -2.4rem;
+}
+
+.timeline li:hover .title {
+    opacity: 1;
+}
+
+.data {
+    width: 1.3rem;
+    height: 1.3rem;
+    background-color: var(--timeline-bg-color);
+    color: #fff;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+
+    overflow: hidden;
+    }
+
+.timeline li:hover .data {
+    background-color: var(--primary-color);
+    --scale: 1.2;
+    cursor: pointer;
+    z-index: 200;
+}
+
+.data.show {
+    width: 30rem;
+    height: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    background-image: linear-gradient(45deg, var(--primary-color), magenta);
+
+    box-shadow: 0 .1rem .4rem #0004;
+
+    z-index: 100;
+}
+
+.data h3 {
+    text-transform: capitalize;
+    margin-left: 1.7rem;
+}
+
+.data p {
+    background-color: #fff3;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.data.show h3 {
+    margin-left: 0;
+}
+
+.data .close {
+    align-self: flex-start;
+    background-color: #00a1ff;
+
+    padding: .5rem .8rem;
+    border-radius: 2rem;
+
+    font-size: 1rem;
+}
+
+    /* styles added for the start and end markers */
+
+.timeline li.fixed {
+    position: relative;
+    width: 2rem; /* Adjust the width as needed */
+}
+
+.timeline li.fixed::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    z-index: 1;
+}
+
+.timeline li.start::before {
+    content: "Start";
+    /* Add additional styles for the start marker */
+}
+
+.timeline li.end::before {
+    content: "End";
+    /* Add additional styles for the end marker */
+}
+
+.timeline li.start::before,
+.timeline li.end::before {
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4rem; /* Adjust as needed */
+    height: 4rem; /* Adjust as needed */
+    border-radius: 1rem;
+    background-color: var(--timeline-bg-color);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: #fff;
+    font-weight: 600;
+}
+
+.timeline li.start::after,
+.timeline li.end::after {
+    content: attr(data-time);
+    position: relative;
+    color: white; /* Adjust as needed */
+    font-size: 0.8rem; /* Adjust as needed */
+}
+
+.timeline li.start::after {
+    content: attr(data-time);
+}
+
+.timeline li.end::after {
+    content: attr(data-time);
+}

@@ -54,6 +54,14 @@ const timeline_wrapper = document.querySelector('.timeline-wrapper');
         timeLineElement.onclick = () => timeLineElement.classList.toggle('show');
 
         });
+
+        // Add touch event listeners for opening/closing the details
+        const timeLineElement = lifeItem.querySelector('.data');
+
+        timeLineElement.addEventListener('touchstart', (event) => {
+        event.preventDefault(); // Prevent touch scrolling
+        timeLineElement.classList.toggle('show');
+        });
   
       });
 

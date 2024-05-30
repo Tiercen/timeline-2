@@ -77,3 +77,28 @@ timeline_wrapper.addEventListener('mousemove', (event) => {
     console.log(scroll_width.toFixed(1));
     timeline.style.left = scroll_width.toFixed(1) + 'px'
 })
+
+// Add touch event listeners
+const touchStartX = null;
+const touchEndX = null;
+
+timeline_wrapper.addEventListener('touchstart', (event) => {
+  touchStartX = event.touches[0].clientX;
+});
+
+timeline_wrapper.addEventListener('touchmove', (event) => {
+  const currentX = event.touches[0].clientX;
+  const diffX = currentX - touchStartX;
+
+  const timeline = document.querySelector('.timeline');
+  const maxScroll = timeline_wrapper.clientWidth - timeline.clientWidth;
+  const scroll = Math.max(0, Math.min(maxScroll, timeline.scrollLeft + diffX));
+
+  timeline.scrollLeft = scroll;
+  event.preventDefault(); // Prevent default touch behavior
+});
+
+timeline_wrapper.addEventListener('touchend', () => {
+  touchStartX = null;
+  touchEndX = null;
+});

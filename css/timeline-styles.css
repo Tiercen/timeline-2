@@ -62,6 +62,9 @@ h1 {
 
     overflow-x: auto;
     transition: .3s ease;
+
+    touch-action: pan-x; /* Allow horizontal panning */
+    overscroll-behavior: contain; /* Prevent overscrolling */
 }
 
 .timeline {

@@ -71,42 +71,59 @@ for(const time of timelines) {
     time.onclick = ()=> time.classList.toggle('show');
 }
 
-timeline_wrapper.addEventListener('mousemove', (event) => {
-    const timeline = document.querySelector('.timeline');
-    const fixedMarkers = document.querySelectorAll('.timeline li.fixed'); // Added  to get a fixed start and end
-    const totalFixedWidth = Array.from(fixedMarkers).reduce((sum, marker) => sum + marker.offsetWidth, 0); // Added  to get a fixed start and end
-    let scroll_width = event.pageX / timeline_wrapper.clientWidth * (timeline_wrapper.clientWidth - timeline.clientWidth - totalFixedWidth); // modified  to get a fixed start and end
+const timelineWrapper = document.querySelector('.timeline-wrapper');
+const timeline = document.querySelector('.timeline');
+let isDragging = false;
+let currentX;
+let initialX;
+let xOffset = 0;
 
-    console.log({
-        'timeline_width' : timeline.clientWidth,
-        'timeline_wrapper_width' : timeline_wrapper.clientWidth,
-        'Mouse X-coordinate' : event.pageX
-    });
-    console.log(scroll_width.toFixed(1));
-    timeline.style.left = scroll_width.toFixed(1) + 'px'
-})
+timelineWrapper.addEventListener('mousedown', dragStart);
+timelineWrapper.addEventListener('mouseup', dragEnd);
+timelineWrapper.addEventListener('mouseleave', dragEnd);
+timelineWrapper.addEventListener('mousemove', drag);
 
-// Add touch event listeners
-const touchStartX = null;
-const touchEndX = null;
+function dragStart(e) {
+  initialX = e.clientX - xOffset;
+  isDragging = true;
+}
 
-timeline_wrapper.addEventListener('touchstart', (event) => {
-  touchStartX = event.touches[0].clientX;
+function dragEnd(e) {
+  initialX = currentX;
+  isDragging = false;
+}
+
+function drag(e) {
+  if (isDragging) {
+    e.preventDefault();
+    currentX = e.clientX - initialX;
+    xOffset = currentX;
+    setTranslate(currentX, 0, timeline);
+  }
+}
+
+function setTranslate(xPos, yPos, el) {
+  el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+}
+
+let touchStart = null;
+let touchEnd = null;
+
+timelineWrapper.addEventListener('touchstart', (e) => {
+  touchStart = e.touches[0].clientX;
+  timelineWrapper.style.scrollSnapType = 'none'; // Disable scroll snapping during touch interaction
 });
 
-timeline_wrapper.addEventListener('touchmove', (event) => {
-  const currentX = event.touches[0].clientX;
-  const diffX = currentX - touchStartX;
-
-  const timeline = document.querySelector('.timeline');
-  const maxScroll = timeline_wrapper.clientWidth - timeline.clientWidth;
-  const scroll = Math.max(0, Math.min(maxScroll, timeline.scrollLeft + diffX));
-
-  timeline.scrollLeft = scroll;
-  event.preventDefault(); // Prevent default touch behavior
+timelineWrapper.addEventListener('touchmove', (e) => {
+  if (touchStart !== null) {
+    const currentX = e.touches[0].clientX;
+    const diffX = currentX - touchStart;
+    timeline.style.transform = `translateX(${diffX}px)`;
+  }
 });
 
-timeline_wrapper.addEventListener('touchend', () => {
-  touchStartX = null;
-  touchEndX = null;
+timelineWrapper.addEventListener('touchend', () => {
+  touchStart = null;
+  timelineWrapper.style.scrollSnapType = 'x mandatory'; // Re-enable scroll snapping
+  timeline.style.transform = 'none';
 });

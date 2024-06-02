@@ -65,6 +65,11 @@ h1 {
 
     touch-action: pan-x; /* Allow horizontal panning */
     overscroll-behavior: contain; /* Prevent overscrolling */
+    cursor: grab;
+}
+
+.timeline-wrapper.grabbing {
+    cursor: grabbing;
 }
 
 .timeline {

@@ -86,11 +86,13 @@ timelineWrapper.addEventListener('mousemove', drag);
 function dragStart(e) {
   initialX = e.clientX - xOffset;
   isDragging = true;
+  timelineWrapper.classList.add('grabbing'); // Add the 'grabbing' class
 }
 
 function dragEnd(e) {
   initialX = currentX;
   isDragging = false;
+  timelineWrapper.classList.remove('grabbing'); // Remove the 'grabbing' class
 }
 
 function drag(e) {

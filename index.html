@@ -17,7 +17,20 @@
         <a href="https://www.youtube.com/watch?v=gQBXtqm29Sk" class="source-tutorial">CodingDesign Simple Interactive Timeline Using Vanilla JavaScript</a>
     </div>
     <div class="timeline-wrapper">
-        <svg id="hexagonGrid" width="100%" height="100%"></svg>
+        
+        <svg id="hexagonGrid" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <!-- Your hexagons go here -->
+          </svg>
+          
         <ul class="timeline">
             <li class="fixed start" data-time="Start"></li>
             <!-- Content added via JavaScript -->

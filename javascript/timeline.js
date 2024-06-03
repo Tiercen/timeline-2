@@ -129,7 +129,7 @@ const hexagonGrid = document.getElementById('hexagonGrid');
 // Function to generate the hexagonal grid pattern
 function generateBackgroundPattern() {
   const hexagonSize = 25; // Adjust this value to control the size of the hexagons
-  const hexagonRows = 50; // Adjust this value based on your layout
+  const hexagonRows = 75; // Adjust this value based on your layout
   const hexagonCols = 50; // Adjust this value based on your layout
 
   for (let row = 0; row < hexagonRows; row++) {

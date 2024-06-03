@@ -101,7 +101,7 @@ h1 {
 .timeline {
     position: absolute;
     height: .5rem;
-    padding: 0 15rem;
+    padding: 0 10rem;
     /* background-color: var(--timeline-bg-color); */
     list-style: none;
 

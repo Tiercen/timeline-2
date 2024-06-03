@@ -64,6 +64,13 @@ h1 {
     margin-bottom: 1rem;
 }
 
+#hexagonGrid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .timeline-wrapper::-webkit-scrollbar {
     display: none;
 }

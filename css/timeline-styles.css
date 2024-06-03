@@ -25,6 +25,7 @@ h1 {
     text-align: center;
     border-radius: 1.5rem;
     margin-top: .5rem;
+    padding: 0 1em;
 }
 
 .topper {
@@ -43,6 +44,11 @@ h1 {
     font-weight: 600;
 }
 
+.topper > p {
+    padding: 0 1rem;
+    text-align: center;
+}
+
 .topper a {
     margin-bottom: 1rem;
 }
@@ -57,7 +63,7 @@ h1 {
     height: 70vh;
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     overflow-x: auto;
@@ -65,6 +71,8 @@ h1 {
 
     touch-action: pan-x; /* Allow horizontal panning */
     overscroll-behavior: contain; /* Prevent overscrolling */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     cursor: grab;
 }
 
@@ -82,11 +90,14 @@ h1 {
     --scale: 1;
 
     display: flex;
+    scroll-snap-align: start;
 }
 
 .timeline li {
     position: relative;
     width: 20rem;
+
+    scroll-snap-align: center;
 }
 
 .timeline li::before,
@@ -247,7 +258,7 @@ h1 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    
     width: 4rem; /* Adjust as needed */
     height: 4rem; /* Adjust as needed */
     border-radius: 1rem;
@@ -261,19 +272,10 @@ h1 {
     color: #fff;
     font-weight: 600;
 }
-
-.timeline li.start::after,
-.timeline li.end::after {
-    content: attr(data-time);
-    position: relative;
-    color: white; /* Adjust as needed */
-    font-size: 0.8rem; /* Adjust as needed */
+.timeline li.start::before {
+    transform: translate(-200%, -50%);
 }
 
-.timeline li.start::after {
-    content: attr(data-time);
-}
-
-.timeline li.end::after {
-    content: attr(data-time);
+.timeline li.end::before {
+    transform: translate(200%, -50%);
 }

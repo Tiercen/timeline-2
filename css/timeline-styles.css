@@ -64,13 +64,6 @@ h1 {
     margin-bottom: 1rem;
 }
 
-#hexagonGrid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
 .timeline-wrapper::-webkit-scrollbar {
     display: none;
 }
@@ -203,7 +196,7 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 1rem;
+    gap: .5rem;
 
     overflow: hidden;
     touch-action: manipulation;
@@ -308,6 +301,16 @@ h1 {
     transform: translate(-200%, -50%);
 }
 
+.timeline li.start:hover::before {
+    scale: 1.2;
+    box-shadow: 1rem 1rem 4rem #0004;
+}
+
 .timeline li.end::before {
     transform: translate(200%, -50%);
+}
+
+.timeline li.end:hover::before {
+    scale: 1.2;
+    box-shadow: 1rem 1rem 4rem #0004;
 }

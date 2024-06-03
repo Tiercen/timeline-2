@@ -82,10 +82,17 @@ h1 {
 
 .timeline {
     position: absolute;
-    height: .12rem;
+    height: .5rem;
     padding: 0 15rem;
-    background-color: var(--timeline-bg-color);
+    /* background-color: var(--timeline-bg-color); */
     list-style: none;
+
+    background: linear-gradient(#262626, #eaeaea, #262626);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 
     --scale: 1;
 
@@ -117,8 +124,8 @@ h1 {
     top: 1rem;
 
     display: inline-block;
-    width: 0.12rem;
-    height: 1rem;
+    width: 0.25rem;
+    height: 2rem;
     background-color: var(--timeline-bg-color);
 }
 
@@ -133,6 +140,10 @@ h1 {
 .timeline li::after {
     content: attr(data-date);
     top: -3.4rem;
+
+    background-color: rgba(240, 255, 255, 0.354);
+    padding: .5rem;
+    border-radius: 10%;
 }
 
 .timeline li:nth-child(odd)::after {
@@ -142,6 +153,9 @@ h1 {
 .timeline li:hover::after,
 .timeline li .title {
     color: var(--primary-color);
+    background-color: rgba(240, 255, 255, 0.354);
+    padding: .5rem;
+    border-radius: 10%;
 }
 
 .timeline li .title {
@@ -162,8 +176,8 @@ h1 {
 }
 
 .data {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 2rem;
+    height: 2rem;
     background-color: var(--timeline-bg-color);
     color: #fff;
     border-radius: 50%;
@@ -199,7 +213,7 @@ h1 {
 
 .data h3 {
     text-transform: capitalize;
-    margin-left: 1.7rem;
+    margin-left: 3.7rem; /* Hides the title when not shown */
 }
 
 .data p {
@@ -213,7 +227,7 @@ h1 {
 }
 
 .data .close {
-    align-self: flex-start;
+    align-self: center;
     background-color: #00a1ff;
 
     padding: .5rem .8rem;

@@ -65,12 +65,6 @@ const timeline_wrapper = document.querySelector('.timeline-wrapper');
   
       });
 
-const timelines = document.querySelectorAll('.timeline li .data');
-
-for(const time of timelines) {
-    time.onclick = ()=> time.classList.toggle('show');
-}
-
 const timelineWrapper = document.querySelector('.timeline-wrapper');
 const timeline = document.querySelector('.timeline');
 let isDragging = false;
@@ -128,4 +122,64 @@ timelineWrapper.addEventListener('touchend', () => {
   touchStart = null;
   timelineWrapper.style.scrollSnapType = 'x mandatory'; // Re-enable scroll snapping
   timeline.style.transform = 'none';
+});
+
+const hexagonGrid = document.getElementById('hexagonGrid');
+
+// Function to generate the hexagonal grid pattern
+function generateBackgroundPattern() {
+  const hexagonSize = 25; // Adjust this value to control the size of the hexagons
+  const hexagonRows = 50; // Adjust this value based on your layout
+  const hexagonCols = 50; // Adjust this value based on your layout
+
+  for (let row = 0; row < hexagonRows; row++) {
+    for (let col = 0; col < hexagonCols; col++) {
+      const x = col * hexagonSize * 1.5;
+      const y = row * hexagonSize * Math.sqrt(3) + ((col % 2) * hexagonSize * Math.sqrt(3) / 2);
+      drawHexagon(hexagonGrid, x, y, hexagonSize);
+    }
+  }
+}
+
+// Function to draw a single hexagon
+function drawHexagon(svg, x, y, size) {
+  const points = calculateHexagonPoints(x, y, size);
+  const hexagon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  hexagon.setAttribute('points', points);
+  hexagon.style.fill = 'white';
+  hexagon.style.stroke = 'lightgray';
+  hexagon.style.strokeWidth = '5';
+  svg.appendChild(hexagon);
+}
+
+// Function to calculate the points of a hexagon
+function calculateHexagonPoints(x, y, size) {
+  let points = '';
+  for (let side = 0; side < 7; side++) {
+    const px = x + size * Math.cos(side * 2 * Math.PI / 6);
+    const py = y + size * Math.sin(side * 2 * Math.PI / 6);
+    points += `${px},${py} `;
+  }
+  return points.trim();
+}
+
+// Initial setup
+generateBackgroundPattern();
+
+hexagonGrid.addEventListener('mousemove', function(e) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+  for (const hexagon of hexagonGrid.children) {
+    const rect = hexagon.getBoundingClientRect();
+    const hexagonCenterX = rect.left + rect.width / 2;
+    const hexagonCenterY = rect.top + rect.height / 2;
+    const distance = Math.sqrt((mouseX - hexagonCenterX) ** 2 + (mouseY - hexagonCenterY) ** 2);
+    if (distance < 70) { // Adjust this value to control when the glow effect is applied
+      hexagon.style.stroke = 'darkgray';
+      hexagon.style.filter = 'drop-shadow(0 0 15px lightgray)'; // Add the glow effect
+    } else {
+      hexagon.style.stroke = 'lightgray';
+      hexagon.style.filter = 'none'; // Remove the glow effect
+    }
+  }
 });

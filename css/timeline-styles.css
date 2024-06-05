@@ -258,11 +258,12 @@ h1 {
     background-color: #fff3;
     padding: 1rem;
     border-radius: 1rem;
-
+    margin-left: 3.7rem; /* Hides the title when not shown */
     font-size: .90rem;
 }
 
-.data.show h3 {
+.data.show h3,
+.data.show p {
     margin-left: 0;
 }
 

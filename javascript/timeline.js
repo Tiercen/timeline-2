@@ -129,8 +129,8 @@ const hexagonGrid = document.getElementById('hexagonGrid');
 // Function to generate the hexagonal grid pattern
 function generateBackgroundPattern() {
   const hexagonSize = 25; // Adjust this value to control the size of the hexagons
-  const hexagonRows = 150; // Adjust this value based on your layout
-  const hexagonCols = 50; // Adjust this value based on your layout
+  const hexagonRows = 75; // Adjust this value based on your layout
+  const hexagonCols = 75; // Adjust this value based on your layout
 
   for (let row = 0; row < hexagonRows; row++) {
     for (let col = 0; col < hexagonCols; col++) {
@@ -166,7 +166,7 @@ function calculateHexagonPoints(x, y, size) {
 // Initial setup
 generateBackgroundPattern();
 
-hexagonGrid.addEventListener('mousemove', function(e) {
+document.body.addEventListener('mousemove', function(e) {
   const mouseX = e.clientX;
   const mouseY = e.clientY;
   for (const hexagon of hexagonGrid.children) {
@@ -184,7 +184,7 @@ hexagonGrid.addEventListener('mousemove', function(e) {
   }
 });
 
-hexagonGrid.addEventListener('mouseleave', function() {
+document.body.addEventListener('mouseleave', function() {
   // Select all hexagons
   const hexagons = hexagonGrid.querySelectorAll('polygon');
 

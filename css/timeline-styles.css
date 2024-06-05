@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #4000ff;
+    --primary-color: #3d3555;
     --timeline-bg-color: #888;
 }
 
@@ -17,6 +17,7 @@ body {
 
     justify-content: center;
     align-items: center;
+    row-gap: 1rem;
 }
 
 polygon {
@@ -27,13 +28,26 @@ polygon {
     filter: url(#glow);
     transition-delay: 1s; /* Adjust this value to control the delay */
   }
+
+  #hexagonGrid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
   
 
 h1 {
-    background-color: rgb(19, 224, 224);
+    background: rgba(225, 224, 230, 0.29);
+    border-radius: 16px;
+    box-shadow: 0 5px 10px rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 5px solid rgba(81, 33, 159, 0.16);
+
     width: 60%;
     text-align: center;
-    border-radius: 1.5rem;
+    /* border-radius: 1.5rem; */
     margin-top: .5rem;
     padding: 0 1em;
 }
@@ -47,8 +61,9 @@ h1 {
     gap: .5rem;
     width: 100%;
     /* height: 25vh; */
+    z-index: 50;
 
-    background-color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .topper > * {
@@ -85,6 +100,17 @@ h1 {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     cursor: grab;
+
+    z-index: 0;
+    /* From https://css.glass */
+    background: rgba(225, 224, 230, 0.29);
+    border-radius: 16px;
+    box-shadow: 0 20px 30px rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 5px solid rgba(81, 33, 159, 0.16);
+
+    
 }
 
 .timeline-wrapper.grabbing {
@@ -109,6 +135,7 @@ h1 {
 
     display: flex;
     scroll-snap-align: start;
+    z-index: 2;
 }
 
 .timeline li {
@@ -132,16 +159,16 @@ h1 {
 
 .timeline li::before {
     content: "";
-    top: 1rem;
+    top: 1.5rem;
 
     display: inline-block;
     width: 0.25rem;
-    height: 2rem;
+    height: 2.5rem;
     background-color: var(--timeline-bg-color);
 }
 
 .timeline li:nth-child(even)::before {
-    top: -1rem;
+    top: -1.5rem;
 }
 
 .timeline li:hover::before {
@@ -150,27 +177,26 @@ h1 {
 
 .timeline li::after {
     content: attr(data-date);
-    top: -3.4rem;
+    top: -4.4rem;
 
-    background-color: rgba(240, 255, 255, 0.354);
     padding: .5rem;
     border-radius: 10%;
 }
 
 .timeline li:nth-child(odd)::after {
-    top: 3.4rem;
+    top: 4.4rem;
 }
 
 .timeline li:hover::after,
 .timeline li .title {
     color: var(--primary-color);
-    background-color: rgba(240, 255, 255, 0.354);
+
     padding: .5rem;
     border-radius: 10%;
 }
 
 .timeline li .title {
-    top: 2.4rem;
+    top: 4.4rem;
 
     font: 600 1.1rem 'poppins', sans-serif;
     white-space: pre; /* Keeps the title on a single line */
@@ -179,7 +205,7 @@ h1 {
 }
 
 .timeline li:nth-child(odd) > .title {
-    top: -2.4rem;
+    top: -4.4rem;
 }
 
 .timeline li:hover .title {
@@ -191,6 +217,7 @@ h1 {
     height: 2rem;
     background-color: var(--timeline-bg-color);
     color: #fff;
+    
     border-radius: 50%;
 
     display: flex;
@@ -215,7 +242,7 @@ h1 {
     border-radius: 1rem;
     padding: 1rem;
 
-    background-image: linear-gradient(45deg, var(--primary-color), magenta);
+    background-image: linear-gradient(45deg, var(--primary-color), rgb(152, 178, 213));
 
     box-shadow: 0 .1rem .4rem #0004;
 
@@ -231,6 +258,8 @@ h1 {
     background-color: #fff3;
     padding: 1rem;
     border-radius: 1rem;
+
+    font-size: .90rem;
 }
 
 .data.show h3 {
@@ -239,7 +268,12 @@ h1 {
 
 .data .close {
     align-self: center;
-    background-color: #00a1ff;
+    background: rgba(225, 224, 230, 0.29);
+    border-radius: 16px;
+    box-shadow: 0 20px 30px rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 5px solid rgba(81, 33, 159, 0.16);
 
     padding: .5rem .8rem;
     border-radius: 2rem;
